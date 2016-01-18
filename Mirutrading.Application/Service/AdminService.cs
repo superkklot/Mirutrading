@@ -2,6 +2,7 @@
 using Mirutrading.Application.Interface;
 using Mirutrading.Application.ViewModel.Admin;
 using Mirutrading.Infrastructure;
+using Mirutrading.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,11 @@ namespace Mirutrading.Application.Service
 {
 	public class AdminService : IAdminService
 	{
+		private IProductRepository _productRepository;
+		public AdminService(IProductRepository productRepository)
+		{
+			_productRepository = productRepository;
+		}
 		public bool IsUserAuthorized(LoginRequest request)
 		{
 			var targetToken = AppConfigHelper.AdminToken;
@@ -19,5 +25,7 @@ namespace Mirutrading.Application.Service
 			var sourceToken = Security.ComputeMd5String(source);
 			return targetToken == sourceToken;
 		}
+
+
 	}
 }

@@ -55,6 +55,10 @@
       <Project>{ae59ed45-bd4e-4884-b2ac-af01601be4c7}</Project>
       <Name>Mirutrading.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mirutrading.Repository\Mirutrading.Repository.csproj">
+      <Project>{a9f1ded5-d887-46ce-896e-ad1c7c0b4d46}</Project>
+      <Name>Mirutrading.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

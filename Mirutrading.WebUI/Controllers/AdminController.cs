@@ -39,18 +39,17 @@ namespace Mirutrading.WebUI.Controllers
 		[ValidateAntiForgeryToken]
         public ActionResult Login(LoginRequest request, string returnUrl)
         {
+			if (!ModelState.IsValid) return View();
+
 			bool isAuthorize = _adminService.IsUserAuthorized(request);
 			if(isAuthorize)
 			{
-				CookieHelper.SetCookie(CookieHelper.adminCookieKey, CookieHelper.adminCookieValue);
+				CookieHelper.SetCookie(CookieHelper.adminCookieKey, CookieHelper.GetNewToken());
 				return Redirect(returnUrl);
 			}
 			else
 			{
-				if (ModelState.IsValid)
-				{
-					ModelState.AddModelError("unauthorize", "输入的用户名密码出错");
-				}
+				ModelState.AddModelError("unauthorize", "输入的用户名密码出错");
 				ViewBag.ReturnUrl = _index_url;
 				return View();
 			}

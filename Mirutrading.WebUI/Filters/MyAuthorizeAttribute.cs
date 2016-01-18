@@ -14,9 +14,13 @@ namespace Mirutrading.WebUI.Filters
         public void OnAuthorization(AuthorizationContext filterContext)
         {
 			var value = CookieHelper.GetCookie(CookieHelper.adminCookieKey);
-			if (value == null || value != CookieHelper.adminCookieValue)
+			if (value == null || !CookieHelper.IsTokenValid(value))
 			{
 				filterContext.Result = new RedirectResult("~/Admin/Login");
+			}
+			else
+			{
+				CookieHelper.RefreshToken(value);
 			}
         }
     }

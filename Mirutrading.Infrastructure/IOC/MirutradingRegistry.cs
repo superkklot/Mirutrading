@@ -15,6 +15,7 @@ namespace Mirutrading.Infrastructure.IOC
 			{
 				_.Assembly("Mirutrading.WebUI");
 				_.Assembly("Mirutrading.Application");
+				_.Assembly("Mirutrading.Repository");
 				_.WithDefaultConventions();
 			});
 		}
