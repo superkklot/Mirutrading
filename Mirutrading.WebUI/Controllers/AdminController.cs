@@ -6,30 +6,54 @@ using System.Web;
 using System.Web.Mvc;
 using Mirutrading.Application;
 using Mirutrading.Application.ViewModel.Admin;
+using Mirutrading.Application.Interface;
+using Mirutrading.WebUI.Common;
 
 namespace Mirutrading.WebUI.Controllers
 {
-    [MyAuthorize]
     public class AdminController : Controller
     {
+		private IAdminService _adminService;
+		private const string _index_url = "~/Admin/Index";
+
+		public AdminController(IAdminService adminService)
+		{
+			_adminService = adminService;
+		}
+
         // GET: Admin
+		[MyAuthorize]
         public ActionResult Index()
         {
             return View();
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public ActionResult Login()
         {
+			ViewBag.ReturnUrl = _index_url;
             return View();
         }
 
-        [AllowAnonymous]
         [HttpPost]
-        public ActionResult Login(LoginRequest request)
+		[ValidateAntiForgeryToken]
+        public ActionResult Login(LoginRequest request, string returnUrl)
         {
-            return View();
+			bool isAuthorize = _adminService.IsUserAuthorized(request);
+			if(isAuthorize)
+			{
+				CookieHelper.SetCookie(CookieHelper.adminCookieKey, CookieHelper.adminCookieValue);
+				return Redirect(returnUrl);
+			}
+			else
+			{
+				if (ModelState.IsValid)
+				{
+					ModelState.AddModelError("unauthorize", "输入的用户名密码出错");
+				}
+				ViewBag.ReturnUrl = _index_url;
+				return View();
+			}
         }
     }
 }

@@ -30,6 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StructureMap">
+      <HintPath>..\packages\structuremap.4.0.1.318\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap.Net4">
+      <HintPath>..\packages\structuremap.4.0.1.318\lib\net40\StructureMap.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,8 +46,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EnumerableExtension.cs" />
+    <Compile Include="ExceptionHandling\BusinessException.cs" />
+    <Compile Include="ExceptionHandling\ErrorCode.cs" />
+    <Compile Include="ExceptionHandling\ErrorCodeExtends.cs" />
+    <Compile Include="ExceptionHandling\ErrorMsgAttribute.cs" />
+    <Compile Include="IOC\ContainerFactory.cs" />
+    <Compile Include="IOC\MirutradingContainer.cs" />
+    <Compile Include="IOC\MirutradingRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

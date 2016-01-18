@@ -92,6 +92,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Mirutrading.Infrastructure\Mirutrading.Infrastructure.csproj">
+      <Project>{ae59ed45-bd4e-4884-b2ac-af01601be4c7}</Project>
+      <Name>Mirutrading.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mirutrading.WebUI\Mirutrading.WebUI.csproj">
       <Project>{D00458A7-8E50-4E03-B945-797EA93AC97D}</Project>
       <Name>Mirutrading.WebUI</Name>

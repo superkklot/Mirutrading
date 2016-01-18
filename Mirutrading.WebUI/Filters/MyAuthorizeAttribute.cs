@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Mirutrading.Application.Common;
+using Mirutrading.WebUI.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +13,11 @@ namespace Mirutrading.WebUI.Filters
     {
         public void OnAuthorization(AuthorizationContext filterContext)
         {
-            
+			var value = CookieHelper.GetCookie(CookieHelper.adminCookieKey);
+			if (value == null || value != CookieHelper.adminCookieValue)
+			{
+				filterContext.Result = new RedirectResult("~/Admin/Login");
+			}
         }
     }
 }
