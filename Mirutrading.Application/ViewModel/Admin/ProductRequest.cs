@@ -1,21 +1,23 @@
-﻿using MongoDB.Bson;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mirutrading.Repository.Models
+namespace Mirutrading.Application.ViewModel.Admin
 {
-	public class Product
+	public class ProductRequest
 	{
 		public string _id { get; set; }
+		[Required]
 		public int Type { get; set; }
+		[Required]
+		[StringLength(50)]
 		public string Name { get; set; }
 		public int Price { get; set; }
+		[Required]
+		[StringLength(200)]
 		public string LinkUrl { get; set; }
-		public int Status { get; set; }
-		public DateTime CreateDate { get; set; }
-		public DateTime UpdateDate { get; set; }
 	}
 }

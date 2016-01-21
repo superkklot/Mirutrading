@@ -55,8 +55,14 @@
     <Compile Include="MongoClientSingleton.cs" />
     <Compile Include="ProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValueObjects\PrdStatus.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Mirutrading.Infrastructure\Mirutrading.Infrastructure.csproj">
+      <Project>{ae59ed45-bd4e-4884-b2ac-af01601be4c7}</Project>
+      <Name>Mirutrading.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

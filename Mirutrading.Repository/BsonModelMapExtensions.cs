@@ -17,6 +17,9 @@ namespace Mirutrading.Repository
 			bsonDoc.Add("Name", prd.Name);
 			bsonDoc.Add("Price", prd.Price);
 			bsonDoc.Add("LinkUrl", prd.LinkUrl);
+			bsonDoc.Add("Status", prd.Status);
+			bsonDoc.Add("CreateDate", prd.CreateDate);
+			bsonDoc.Add("UpdateDate", prd.UpdateDate);
 			return bsonDoc;
 		}
 
@@ -28,7 +31,19 @@ namespace Mirutrading.Repository
 			prd.Name = doc.GetValue("Name").AsString;
 			prd.Price = doc.GetValue("Price").AsInt32;
 			prd.LinkUrl = doc.GetValue("LinkUrl").AsString;
+			prd.Status = doc.ExtTryGetValue<int>("Status").AsInt32;
+			prd.CreateDate = doc.ExtTryGetValue<DateTime>("CreateDate").ToUniversalTime();
+			prd.CreateDate = doc.ExtTryGetValue<DateTime>("UpdateDate").ToUniversalTime();
 			return prd;
+		}
+
+		public static BsonValue ExtTryGetValue<T>(this BsonDocument doc, string name)
+		{
+			T t = default(T);
+			BsonValue ret;
+			bool boolret = doc.TryGetValue(name, out ret);
+			if (!boolret) ret = BsonValue.Create(t);
+			return ret;
 		}
 	}
 }

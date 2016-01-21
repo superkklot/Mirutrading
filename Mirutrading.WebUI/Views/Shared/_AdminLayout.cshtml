@@ -10,10 +10,11 @@
         @RenderSection("head", required: false)
     </head>
     <body>
-        @RenderBody()
-
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
-    </body>
+		<div class="container body-content">
+			@RenderBody()
+		</div>
+			@Scripts.Render("~/bundles/jquery")
+			@Scripts.Render("~/bundles/bootstrap")
+			@RenderSection("scripts", required: false)
+</body>
 </html>

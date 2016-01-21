@@ -8,6 +8,9 @@ using Mirutrading.Application;
 using Mirutrading.Application.ViewModel.Admin;
 using Mirutrading.Application.Interface;
 using Mirutrading.WebUI.Common;
+using Mirutrading.Application.ViewModel;
+using Mirutrading.Infrastructure.ExceptionHandling;
+using System.Text;
 
 namespace Mirutrading.WebUI.Controllers
 {
@@ -23,9 +26,12 @@ namespace Mirutrading.WebUI.Controllers
 
         // GET: Admin
 		[MyAuthorize]
-        public ActionResult Index()
+        public ActionResult Index(int? index, int? size)
         {
-            return View();
+			int idx = index.HasValue ? index.Value : 1;
+			int sz = size.HasValue ? size.Value : 20;
+			var result = _adminService.GetProducts(idx, sz);
+            return View(result);
         }
 
         [HttpGet]
@@ -54,5 +60,35 @@ namespace Mirutrading.WebUI.Controllers
 				return View();
 			}
         }
+
+		[MyAuthorize]
+		public ActionResult AddProduct(ProductRequest request)
+		{
+			if(ModelState.IsValid)
+			{
+				_adminService.AddProduct(request);
+				return Json(new MessageBase(0, "成功"));
+			}
+			else
+			{
+				StringBuilder sb = new StringBuilder();
+				if(ModelState.Values != null)
+				{
+					foreach(var ms in ModelState.Values)
+					{
+						if (ms.Errors != null)
+						{
+							var modelError = ms.Errors.FirstOrDefault();
+							if(modelError != null)
+							{
+								sb.Append(modelError.ErrorMessage ?? "");
+								sb.Append(";");
+							}
+						}
+					}
+				}
+				return Json(new MessageBase((int)ErrorCode.RequestInvalid, sb.ToString()));
+			}
+		}
     }
 }

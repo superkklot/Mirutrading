@@ -1,4 +1,5 @@
-﻿using Mirutrading.Repository.Models;
+﻿using Mirutrading.Infrastructure;
+using Mirutrading.Repository.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,7 @@ namespace Mirutrading.Repository.Interfaces
 		void Add(Product prd);
 
 		List<Product> FindAll();
+
+		PagedCollection<Product> Get(int pageindex, int pagesize);
 	}
 }

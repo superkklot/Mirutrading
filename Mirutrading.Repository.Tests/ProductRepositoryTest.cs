@@ -7,26 +7,28 @@ namespace Mirutrading.Repository.Tests
 	[TestClass]
 	public class ProductRepositoryTest
 	{
-		//[TestMethod]
+		[TestMethod]
 		public void AddProduct()
 		{
 			// Arrange
 			Product prd = new Product()
 			{
-				Type = 1,
-				Name = "Hello",
-				Price = 10,
-				LinkUrl = "http://www.baidu.com"
+				Type = 3,
+				Name = "ccc",
+				Price = 11,
+				LinkUrl = "http://www.bb.com"
 			};
 			ProductRepository repository = new ProductRepository();
 			repository.Add(prd);
 		}
 
-		[TestMethod]
+		//[TestMethod]
 		public void FindAllProducts()
 		{
 			ProductRepository repository = new ProductRepository();
 			var ret = repository.FindAll();
+			repository = new ProductRepository();
+			ret = repository.FindAll();
 		}
 	}
 }

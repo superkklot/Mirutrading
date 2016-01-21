@@ -6,7 +6,7 @@ namespace Mirutrading.Infrastructure.Tests
 	[TestClass]
 	public class SecurityTest
 	{
-		[TestMethod]
+		//[TestMethod]
 		public void TestMd5()
 		{
 			string source = "admin_admin123";

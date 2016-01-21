@@ -10,5 +10,8 @@ namespace Mirutrading.Infrastructure.ExceptionHandling
 	{
 		[ErrorMsg("系统错误")]
 		SystemError = 1,
+
+		[ErrorMsg("请求的参数错误")]
+		RequestInvalid = 2,
 	}
 }

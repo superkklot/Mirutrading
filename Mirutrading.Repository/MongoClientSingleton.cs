@@ -11,13 +11,36 @@ namespace Mirutrading.Repository
 	public class MongoClientSingleton
 	{
 		private static readonly string _conn = ConfigurationManager.ConnectionStrings["MongoConnection"].ConnectionString;
-		private static readonly IMongoClient _client = new MongoClient(_conn);
-		private static readonly IMongoDatabase _database = _client.GetDatabase(_dbname);
-		public const string _dbname = "Mirutrading";
+		private IMongoClient _client;
+		private IMongoDatabase _database;
+		private const string _dbname = "Mirutrading";
+		private static MongoClientSingleton _instance;
+		private static object _syncObjc = new object();
 
-		public static IMongoDatabase Database
+		protected MongoClientSingleton()
+		{
+			_client = new MongoClient(_conn);
+			_database = _client.GetDatabase(_dbname);
+		}
+
+		public IMongoDatabase Database
 		{
 			get { return _database; }
+		}
+
+		public static MongoClientSingleton Instance()
+		{
+			if(_instance == null)
+			{
+				lock (_syncObjc)
+				{
+					if (_instance == null)
+					{
+						_instance = new MongoClientSingleton();
+					}
+				}
+			}
+			return _instance;
 		}
 	}
 }
