@@ -44,6 +44,12 @@ namespace Mirutrading.Application.Service
 			_productRepository.Add(prd);
 		}
 
+		public void ModifyProduct(ProductRequest request)
+		{
+			Product prd = _productMapper_vtop.Map(request);
+			_productRepository.Modify(prd);
+		}
+
 		public PagedCollection<ProductRequest> GetProducts(int pageindex, int pagesize)
 		{
 			var prds = _productRepository.Get(pageindex, pagesize);

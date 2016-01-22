@@ -12,6 +12,8 @@ namespace Mirutrading.Repository.Interfaces
 	{
 		void Add(Product prd);
 
+		void Modify(Product prd);
+
 		List<Product> FindAll();
 
 		PagedCollection<Product> Get(int pageindex, int pagesize);

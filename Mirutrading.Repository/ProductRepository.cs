@@ -33,6 +33,15 @@ namespace Mirutrading.Repository
 			task.Wait();
 		}
 
+		public void Modify(Product prd)
+		{
+			if (string.IsNullOrWhiteSpace(prd._id)) return;
+			var filter = Builders<BsonDocument>.Filter.Eq("_id", new ObjectId(prd._id));
+			var update = Builders<BsonDocument>.Update.Set("Type", prd.Type)
+				.Set("Name", prd.Name).Set("Price", prd.Price).Set("LinkUrl", prd.LinkUrl).CurrentDate("UpdateDate");
+			_collection.UpdateOneAsync(filter, update).Wait();
+		}
+
 		public List<Product> FindAll()
 		{
 			List<Product> result = new List<Product>();

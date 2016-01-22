@@ -67,28 +67,52 @@ namespace Mirutrading.WebUI.Controllers
 			if(ModelState.IsValid)
 			{
 				_adminService.AddProduct(request);
-				return Json(new MessageBase(0, "成功"));
+				return SuccessResult();
 			}
 			else
 			{
-				StringBuilder sb = new StringBuilder();
-				if(ModelState.Values != null)
+				return FailedResult();	
+			}
+		}
+
+		[MyAuthorize]
+		public ActionResult ModifyProduct(ProductRequest request)
+		{
+			if (ModelState.IsValid)
+			{
+				_adminService.ModifyProduct(request);
+				return SuccessResult();
+			}
+			else
+			{
+				return FailedResult();	
+			}
+		}
+
+		private ActionResult SuccessResult()
+		{
+			return Json(new MessageBase(0, "成功"));
+		}
+
+		private ActionResult FailedResult()
+		{
+			StringBuilder sb = new StringBuilder();
+			if (ModelState.Values != null)
+			{
+				foreach (var ms in ModelState.Values)
 				{
-					foreach(var ms in ModelState.Values)
+					if (ms.Errors != null)
 					{
-						if (ms.Errors != null)
+						var modelError = ms.Errors.FirstOrDefault();
+						if (modelError != null)
 						{
-							var modelError = ms.Errors.FirstOrDefault();
-							if(modelError != null)
-							{
-								sb.Append(modelError.ErrorMessage ?? "");
-								sb.Append(";");
-							}
+							sb.Append(modelError.ErrorMessage ?? "");
+							sb.Append(";");
 						}
 					}
 				}
-				return Json(new MessageBase((int)ErrorCode.RequestInvalid, sb.ToString()));
 			}
+			return Json(new MessageBase((int)ErrorCode.RequestInvalid, sb.ToString()));
 		}
     }
 }
