@@ -61,5 +61,11 @@ namespace Mirutrading.Application.Service
 			}
 			return new PagedCollection<ProductRequest>(prdRequests, prds.PageIndex, prds.PageSize, prds.ItemCount);
 		}
+
+		public void DeleteProduct(ProductRequest request)
+		{
+			Product prd = _productMapper_vtop.Map(request);
+			_productRepository.Delete(prd);
+		}
 	}
 }

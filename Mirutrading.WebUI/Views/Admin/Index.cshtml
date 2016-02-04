@@ -13,7 +13,7 @@
 		@foreach (var item in Model.Items)
 		{
 			<tr id="@item._id"><td class="item_type">@item.Type</td><td class="item_name">@item.Name</td><td class="item_price">@item.Price</td><td class="item_link">@item.LinkUrl</td>
-				<td><a class="modify_product" href="javascript:void();">修改</a>&nbsp;&nbsp;<a href="javascript:void();">删除</a></td></tr>
+				<td><a class="modify_product" href="javascript:void();">修改</a>&nbsp;&nbsp;<a class="delete_product" href="javascript:void();">删除</a></td></tr>
 		}
 	</tbody>
 </table>
@@ -21,7 +21,14 @@
 <div style="float:right">
 	@for (int i = 1; i <= Model.PageCount; i++)
 	{
-		<a href="javascript:void();">@i</a><span>&nbsp;</span>
+		if (i == Model.PageIndex)
+		{
+			<button type="button" class="btn btn-primary active">@i</button><span>&nbsp;</span>
+		}
+		else
+		{
+			<button type="button" class="btn btn-default pageBtn">@i</button><span>&nbsp;</span>
+		}
 	}
 </div>
 

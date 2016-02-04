@@ -6,6 +6,7 @@ using System.Web;
 
 namespace Mirutrading.WebUI.Common
 {
+	// for cluster servers, tokens should be stored in a single server.
 	public class CookieHelper
 	{
 		private static Dictionary<string, DateTime> tokens = new Dictionary<string, DateTime>();

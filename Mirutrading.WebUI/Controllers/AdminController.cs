@@ -89,6 +89,13 @@ namespace Mirutrading.WebUI.Controllers
 			}
 		}
 
+		[MyAuthorize]
+		public ActionResult DeleteProduct(ProductRequest request)
+		{
+			_adminService.DeleteProduct(request);
+			return SuccessResult();
+		}
+
 		private ActionResult SuccessResult()
 		{
 			return Json(new MessageBase(0, "成功"));

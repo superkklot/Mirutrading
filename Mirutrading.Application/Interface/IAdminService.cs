@@ -16,6 +16,8 @@ namespace Mirutrading.Application.Interface
 
 		void ModifyProduct(ProductRequest request);
 
+		void DeleteProduct(ProductRequest request);
+
 		PagedCollection<ProductRequest> GetProducts(int pageindex, int pagesize);
 
 	}

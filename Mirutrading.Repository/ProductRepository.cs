@@ -42,10 +42,19 @@ namespace Mirutrading.Repository
 			_collection.UpdateOneAsync(filter, update).Wait();
 		}
 
+		public void Delete(Product prd)
+		{
+			if (string.IsNullOrWhiteSpace(prd._id)) return;
+			var filter = Builders<BsonDocument>.Filter.Eq("_id", new ObjectId(prd._id));
+			var update = Builders<BsonDocument>.Update.Set("Status", 1);
+			_collection.UpdateOneAsync(filter, update).Wait();
+		}
+
 		public List<Product> FindAll()
 		{
 			List<Product> result = new List<Product>();
-			var filter = new BsonDocument();
+			var builder = Builders<BsonDocument>.Filter;
+			var filter = builder.Eq("Status", 0) | builder.Exists("Status", false);
 			var sort = Builders<BsonDocument>.Sort.Descending("UpdateDate");
 			_collection.Find(filter).Sort(sort).ToListAsync().ContinueWith(t =>
 			{
@@ -89,7 +98,7 @@ namespace Mirutrading.Repository
 			//return result;
 		}
 
-		//IIS7.5 不支持
+		//目前看iis7.5 上跑有问题
 		private async Task<List<Product>> _FindAll()
 		{
 			List<Product> result = new List<Product>();
