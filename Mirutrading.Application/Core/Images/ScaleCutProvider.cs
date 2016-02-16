@@ -51,10 +51,11 @@ namespace Mirutrading.Application.Core.Images
 			templateGph.DrawImage(initImage, new Rectangle(0, 0, request.ImgSize.Width, request.ImgSize.Height),
 				new Rectangle(0, 0, initImage.Width, initImage.Height), GraphicsUnit.Pixel);
 			templateGph.Dispose();
+			initImage.Dispose();
 			return new HandledImage()
 			{
 				Img = templateImg,
-				Name = string.Format(request.SrcName + "_{0}_{1}_{2}", request.ImgSize.Width, request.ImgSize.Height, request.Quality);
+				Name = string.Format(request.SrcName + "_{0}_{1}_{2}", request.ImgSize.Width, request.ImgSize.Height, request.Quality),
 			};
 		}
 
@@ -73,6 +74,7 @@ namespace Mirutrading.Application.Core.Images
 			// 裁减
 			pickedGph.DrawImage(initImage, toR, fromR, GraphicsUnit.Pixel);
 			pickedGph.Dispose();
+			initImage.Dispose();
 			return ScaleCut(request, pickedImg);
 		}
 
@@ -91,6 +93,7 @@ namespace Mirutrading.Application.Core.Images
 			// 裁减
 			pickedGph.DrawImage(initImage, toR, fromR, GraphicsUnit.Pixel);
 			pickedGph.Dispose();
+			initImage.Dispose();
 			return ScaleCut(request, pickedImg);
 		}
 	}

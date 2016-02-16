@@ -2,6 +2,11 @@
 	
 	var virtualDomain = "/Mirutrading";
 
+	$(".go_image").click(function () {
+		var tr = event.target.parentNode.parentNode;
+		window.open(virtualDomain + "/Image/Index?productId=" + $(tr).attr("id"));
+	})
+
 	// 添加产品
 	$(".add_product").click(function () {
 		$("#myModal").attr("purpose", "add");

@@ -23,6 +23,12 @@ namespace Mirutrading.Application.Core.Images
 		public int Quality { get; set; }
 	}
 
+	public class HandledImageResponse
+	{
+		public ImageSize ImgSize { get; set; }
+		public string ImgUrl { get; set; }
+	}
+
 	public class HandledImage
 	{
 		public string Name { get; set; }

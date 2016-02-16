@@ -1,6 +1,6 @@
 ﻿@model Mirutrading.Infrastructure.PagedCollection<Mirutrading.Application.ViewModel.Admin.ProductRequest>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "产品管理";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -13,7 +13,8 @@
 		@foreach (var item in Model.Items)
 		{
 			<tr id="@item._id"><td class="item_type">@item.Type</td><td class="item_name">@item.Name</td><td class="item_price">@item.Price</td><td class="item_link">@item.LinkUrl</td>
-				<td><a class="modify_product" href="javascript:void();">修改</a>&nbsp;&nbsp;<a class="delete_product" href="javascript:void();">删除</a></td></tr>
+				<td><a class="modify_product" href="javascript:void();">修改</a>&nbsp;&nbsp;<a class="delete_product" href="javascript:void();">删除</a>
+					&nbsp;&nbsp;<a class="go_image" href="javascript:void();">图片</a></td></tr>
 		}
 	</tbody>
 </table>

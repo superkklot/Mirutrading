@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mirutrading.Application.ViewModel.Admin;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace Mirutrading.Application.Interface
 {
 	public interface IImageService
 	{
-
+		List<ImageRequest> GetImages(string productId);
+		void SaveFile(string productid, string vpath, string ppath);
 	}
 }

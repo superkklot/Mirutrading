@@ -10,6 +10,33 @@ namespace Mirutrading.Repository
 {
 	public static class BsonModelMapExtensions
 	{
+		public static BsonDocument ToBson(this Image img)
+		{
+			var bsonDoc = new BsonDocument();
+			bsonDoc.Add("ProductId", img.ProductId);
+			bsonDoc.Add("Height", img.Height);
+			bsonDoc.Add("Width", img.Width);
+			bsonDoc.Add("Url", img.Url);
+			bsonDoc.Add("Status", img.Status);
+			bsonDoc.Add("CreateDate", img.CreateDate);
+			bsonDoc.Add("UpdateDate", img.UpdateDate);
+			return bsonDoc;
+		}
+
+		public static Image ToImage(this BsonDocument doc)
+		{
+			Image img = new Image();
+			img._id = doc.GetValue("_id").AsObjectId.ToString();
+			img.ProductId = doc.GetValue("ProductId").AsString;
+			img.Height = doc.GetValue("Height").AsInt32;
+			img.Width = doc.GetValue("Width").AsInt32;
+			img.Url = doc.GetValue("Url").AsString;
+			img.Status = doc.GetValue("Status").AsInt32;
+			img.CreateDate = doc.GetValue("CreateDate").ToUniversalTime();
+			img.UpdateDate = doc.GetValue("UpdateDate").ToUniversalTime();
+			return img;
+		}
+
 		public static BsonDocument ToBson(this Product prd)
 		{
 			var bsonDoc = new BsonDocument();
