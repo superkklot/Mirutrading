@@ -38,6 +38,28 @@ namespace Mirutrading.Repository
 			return result;
 		}
 
+		public List<Image> GetByProductIds(List<string> productIds)
+		{
+			List<Image> result = new List<Image>();
+			var builder = Builders<BsonDocument>.Filter;
+			FilterDefinition<BsonDocument> filter = null;
+			foreach(var productId in productIds)
+			{
+				filter = filter | builder.Eq("ProductId", productId);
+			}
+			filter = filter & builder.Eq("Status", 0);
+			var sort = Builders<BsonDocument>.Sort.Descending("UpdateDate");
+			_collection.Find(filter).Sort(sort).ToListAsync().ContinueWith(t =>
+			{
+				var list = t.Result;
+				foreach (var item in list)
+				{
+					result.Add(item.ToImage());
+				}
+			}).Wait();
+			return result;
+		}
+
 		public void Add(Image img)
 		{
 			var now = DateTime.Now;

@@ -11,6 +11,8 @@ namespace Mirutrading.Repository.Interfaces
 	{
 		List<Image> GetByProductId(string productId);
 
+		List<Image> GetByProductIds(List<string> productIds);
+
 		void Add(Image img);
 
 		void Modify(Image img);

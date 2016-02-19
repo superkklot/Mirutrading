@@ -1,0 +1,30 @@
+﻿* {
+	margin:0px;
+	padding:0px;
+}
+
+.center{
+	/*margin-left:100px;
+	margin-right:100px;*/
+	padding-left:15%;
+	padding-right:15%;
+}
+
+.title{
+	color:white;
+	font-size: 20px;
+}
+
+.right{
+	float:right;
+}
+
+.header{
+	width:100%;
+	height:50px;
+	background-color:black;
+	padding-top: 10px;
+}
+
+
+

@@ -52,19 +52,26 @@ namespace Mirutrading.Repository
 
 		public List<Product> FindAll()
 		{
-			List<Product> result = new List<Product>();
-			var builder = Builders<BsonDocument>.Filter;
-			var filter = builder.Eq("Status", 0) | builder.Exists("Status", false);
-			var sort = Builders<BsonDocument>.Sort.Descending("UpdateDate");
-			_collection.Find(filter).Sort(sort).ToListAsync().ContinueWith(t =>
+			List<Product> ret = null;
+			_FindAll().ContinueWith(t =>
 			{
-				var list = t.Result;
-				foreach(var item in list)
-				{
-					result.Add(item.ToProduct());
-				}
+				ret = t.Result;
 			}).Wait();
-			return result;
+			return ret;
+
+			//List<Product> result = new List<Product>();
+			//var builder = Builders<BsonDocument>.Filter;
+			//var filter = builder.Eq("Status", 0) | builder.Exists("Status", false);
+			//var sort = Builders<BsonDocument>.Sort.Descending("UpdateDate");
+			//_collection.Find(filter).Sort(sort).ToListAsync().ContinueWith(t =>
+			//{
+			//	var list = t.Result;
+			//	foreach (var item in list)
+			//	{
+			//		result.Add(item.ToProduct());
+			//	}
+			//}).Wait();
+			//return result;
 
 			//List<Product> result = new List<Product>();
 			//var filter = new BsonDocument();
