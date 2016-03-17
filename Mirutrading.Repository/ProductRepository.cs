@@ -9,6 +9,7 @@ using Mirutrading.Repository.Interfaces;
 using Mirutrading.Repository.Models;
 using Mirutrading.Infrastructure;
 using Mirutrading.Repository.ValueObjects;
+using System.Threading;
 
 namespace Mirutrading.Repository
 {
@@ -52,26 +53,26 @@ namespace Mirutrading.Repository
 
 		public List<Product> FindAll()
 		{
-			List<Product> ret = null;
-			_FindAll().ContinueWith(t =>
-			{
-				ret = t.Result;
-			}).Wait();
-			return ret;
+            //List<Product> ret = null;
+            //_FindAll().ContinueWith(t =>
+            //{
+            //    ret = t.Result;
+            //}).Wait();
+            //return ret;
 
-			//List<Product> result = new List<Product>();
-			//var builder = Builders<BsonDocument>.Filter;
-			//var filter = builder.Eq("Status", 0) | builder.Exists("Status", false);
-			//var sort = Builders<BsonDocument>.Sort.Descending("UpdateDate");
-			//_collection.Find(filter).Sort(sort).ToListAsync().ContinueWith(t =>
-			//{
-			//	var list = t.Result;
-			//	foreach (var item in list)
-			//	{
-			//		result.Add(item.ToProduct());
-			//	}
-			//}).Wait();
-			//return result;
+            List<Product> result = new List<Product>();
+            var builder = Builders<BsonDocument>.Filter;
+            var filter = builder.Eq("Status", 0) | builder.Exists("Status", false);
+            var sort = Builders<BsonDocument>.Sort.Descending("UpdateDate");
+            _collection.Find(filter).Sort(sort).ToListAsync().ContinueWith(t =>
+            {
+                var list = t.Result;
+                foreach (var item in list)
+                {
+                    result.Add(item.ToProduct());
+                }
+            }).Wait();
+            return result;
 
 			//List<Product> result = new List<Product>();
 			//var filter = new BsonDocument();
@@ -111,9 +112,9 @@ namespace Mirutrading.Repository
 			List<Product> result = new List<Product>();
 			var filter = new BsonDocument();
 			var count = 0;
-			using (var cursor = await _collection.FindAsync(filter))
+			using (var cursor = await _collection.FindAsync(filter).ConfigureAwait(false))
 			{
-				while (await cursor.MoveNextAsync())
+				while (await cursor.MoveNextAsync().ConfigureAwait(false))
 				{
 					var batch = cursor.Current;
 					foreach (var document in batch)

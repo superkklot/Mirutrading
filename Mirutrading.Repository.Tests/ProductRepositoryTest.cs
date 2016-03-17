@@ -7,7 +7,7 @@ namespace Mirutrading.Repository.Tests
 	[TestClass]
 	public class ProductRepositoryTest
 	{
-		[TestMethod]
+		//[TestMethod]
 		public void AddProduct()
 		{
 			// Arrange
@@ -22,7 +22,7 @@ namespace Mirutrading.Repository.Tests
 			repository.Add(prd);
 		}
 
-		//[TestMethod]
+		[TestMethod]
 		public void FindAllProducts()
 		{
 			ProductRepository repository = new ProductRepository();
