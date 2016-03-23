@@ -1,5 +1,6 @@
 ﻿using EmitMapper;
 using Mirutrading.Application.Core.Images;
+using Mirutrading.Application.Core.Models.Images;
 using Mirutrading.Application.Interface;
 using Mirutrading.Application.ViewModel.Admin;
 using Mirutrading.Repository.Interfaces;
@@ -21,6 +22,11 @@ namespace Mirutrading.Application.Service
 		{
 			_imageMapper_ptov = ObjectMapperManager.DefaultInstance.GetMapper<Image, ImageRequest>();
 		}
+
+        public List<ImageSize> AvailableImages()
+        {
+            return ImageHandler.GetImgSizes();
+        }
 
 		public ImageService(IImageRepository imgRepository)
 		{

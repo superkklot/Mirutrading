@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Drawing.Imaging;
+using Mirutrading.Application.Core.Models.Images;
 
 namespace Mirutrading.Application.Core.Images
 {

@@ -1,5 +1,6 @@
 ﻿using Mirutrading.Application.ViewModel.Admin;
 using Mirutrading.Infrastructure;
+using Mirutrading.Repository.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace Mirutrading.Application.Interface
 		void DeleteProduct(ProductRequest request);
 
 		PagedCollection<ProductRequest> GetProducts(int pageindex, int pagesize);
+
+        PagedCollection<ProductRequest> GetProductsByType(int pageindex, int pagesize, PrdType prdType);
 
 	}
 }

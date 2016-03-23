@@ -5,6 +5,7 @@ using Mirutrading.Application.ViewModel.Admin;
 using Mirutrading.Infrastructure;
 using Mirutrading.Repository.Interfaces;
 using Mirutrading.Repository.Models;
+using Mirutrading.Repository.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,6 +62,18 @@ namespace Mirutrading.Application.Service
 			}
 			return new PagedCollection<ProductRequest>(prdRequests, prds.PageIndex, prds.PageSize, prds.ItemCount);
 		}
+
+        public PagedCollection<ProductRequest> GetProductsByType(int pageindex, int pagesize, PrdType prdType)
+        {
+            var prds = _productRepository.GetByType(pageindex, pagesize, prdType);
+            List<ProductRequest> prdRequests = new List<ProductRequest>();
+            foreach (var prd in prds.Items)
+            {
+                ProductRequest prdReqeust = _productMapper_ptov.Map(prd);
+                prdRequests.Add(prdReqeust);
+            }
+            return new PagedCollection<ProductRequest>(prdRequests, prds.PageIndex, prds.PageSize, prds.ItemCount);
+        }
 
 		public void DeleteProduct(ProductRequest request)
 		{

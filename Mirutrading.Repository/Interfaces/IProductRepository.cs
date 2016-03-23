@@ -1,5 +1,6 @@
 ﻿using Mirutrading.Infrastructure;
 using Mirutrading.Repository.Models;
+using Mirutrading.Repository.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,5 +20,7 @@ namespace Mirutrading.Repository.Interfaces
 		List<Product> FindAll();
 
 		PagedCollection<Product> Get(int pageindex, int pagesize);
+
+        PagedCollection<Product> GetByType(int pageindex, int pagesize, PrdType prdType);
 	}
 }

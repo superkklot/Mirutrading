@@ -73,40 +73,26 @@ namespace Mirutrading.Repository
                 }
             }).Wait();
             return result;
-
-			//List<Product> result = new List<Product>();
-			//var filter = new BsonDocument();
-			//var count = 0;
-			//_collection.FindAsync(filter).ContinueWith(t =>
-			//{
-			//	using (var cursor = t.Result)
-			//	{
-			//		bool ret = true;
-			//		while (ret)
-			//		{
-			//			var task = cursor.MoveNextAsync().ContinueWith<bool>(tt =>
-			//			{
-			//				if (tt.Result == true)
-			//				{
-			//					var batch = cursor.Current;
-			//					foreach (var document in batch)
-			//					{
-			//						var prd = document.ToProduct();
-			//						result.Add(prd);
-			//						count++;
-			//					}
-			//				}
-			//				return tt.Result;
-			//			});
-			//			task.Wait();
-			//			ret = task.Result;
-			//		}
-			//	}
-			//}).Wait();
-			//return result;
 		}
 
-		//目前看iis7.5 上跑有问题
+        private List<Product> FindByType(PrdType prdType)
+        {
+            List<Product> result = new List<Product>();
+            var builder = Builders<BsonDocument>.Filter;
+            var filter = builder.Eq("Status", 0) | builder.Exists("Status", false);
+            filter = filter & builder.Eq("Type", (int)prdType);
+            var sort = Builders<BsonDocument>.Sort.Descending("UpdateDate");
+            _collection.Find(filter).Sort(sort).ToListAsync().ContinueWith(t =>
+            {
+                var list = t.Result;
+                foreach (var item in list)
+                {
+                    result.Add(item.ToProduct());
+                }
+            }).Wait();
+            return result;
+        }
+		
 		private async Task<List<Product>> _FindAll()
 		{
 			List<Product> result = new List<Product>();
@@ -134,5 +120,12 @@ namespace Mirutrading.Repository
 			List<Product> prds = fullList.Skip((pageindex - 1) * pagesize).Take(pagesize).ToList();
 			return new PagedCollection<Product>(prds, pageindex, pagesize, fullList.Count);
 		}
+
+        public PagedCollection<Product> GetByType(int pageindex, int pagesize, PrdType prdType)
+        {
+            var fullList = FindByType(prdType);
+            List<Product> prds = fullList.Skip((pageindex - 1) * pagesize).Take(pagesize).ToList();
+            return new PagedCollection<Product>(prds, pageindex, pagesize, fullList.Count);
+        }
 	}
 }
