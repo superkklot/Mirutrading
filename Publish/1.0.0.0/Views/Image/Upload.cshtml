@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "上传图片";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 style="color:red">@ViewBag.Msg</h2>
+<input type="hidden" id="pid" value="@ViewBag.Pid" />
+<div id="number" style="color:red; font-size:large"></div>
+
+@section scripts{
+	<script type="text/javascript">
+		$(function () {
+			var curNum = 4;
+			var timer;
+			var virtualDomain = "/Mirutrading";
+			function exec() {
+				if (curNum == 0) {
+					clearTimeout(timer);
+					window.location.href = virtualDomain + "/Image/Index?productId=" + $("#pid").val();
+				} else {
+					$("#number").html(curNum--);
+					timer = setTimeout(exec, 1000);
+				}
+			}
+			exec();
+		})
+	</script>
+}
+
+
+

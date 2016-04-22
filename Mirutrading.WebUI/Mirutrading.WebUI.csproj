@@ -191,6 +191,7 @@
     <Content Include="Scripts\Admin\image_index.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\Mirutrading.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Home\home_index.js" />
     <Content Include="Scripts\Home\underscore.js" />

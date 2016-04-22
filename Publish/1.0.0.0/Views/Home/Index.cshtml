@@ -1,0 +1,35 @@
+﻿@model Mirutrading.Infrastructure.PagedCollection<Mirutrading.Application.ViewModel.Home.IndexProduct>
+@{
+    ViewBag.Title = "上海马睿贸易有限公司";
+}
+
+@section css{
+    <link href="~/Content/Home/Index.css" rel="stylesheet" />
+}
+
+<ul class="nav nav-tabs">
+    <li role="presentation"><a href="javascript:void(0)" class="btnBra">文胸</a></li>
+    <li role="presentation"><a href="javascript:void(0)" class="btnBrief">内裤</a></li>
+</ul>
+
+<div class="content">
+    @foreach (var item in Model.Items)
+    {
+        <div class="item">
+            <a href="@item.Product.LinkUrl" target="_blank"><img src="@item.Image.Url" /></a><br />
+            <a href="@item.Product.LinkUrl" target="_blank"><span>@item.Product.Name</span></a>
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script src="~/Scripts/Home/underscore.js"></script>
+    <script src="~/Scripts/Home/home_index.js"></script>
+
+    <script type="text/template" id="bodyTemplate">
+        <div class="item">
+            <a href="<%=Product.LinkUrl%>" target="_blank"><img src="<%=Image.Url%>" /></a><br />
+            <a href="<%=Product.LinkUrl%>" target="_blank"><span><%=Product.Name%></span></a>
+        </div>
+    </script>
+}
