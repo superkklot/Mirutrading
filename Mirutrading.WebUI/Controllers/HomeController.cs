@@ -11,7 +11,7 @@ namespace Mirutrading.WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        private const int _defaultPrdPageCount = 10;
+        private const int _defaultPrdPageCount = 12;
         private IHomeService _homeService;
         private IImageService _imgService;
         public HomeController(IHomeService homeService
@@ -27,6 +27,22 @@ namespace Mirutrading.WebUI.Controllers
                 _imgService.AvailableImages()[0]);
             pagedProducts.Items.ForEach(m => m.Image.Url = ConvertPath.Map(m.Image.Url));
             return View(pagedProducts);
+        }
+
+        public ActionResult GetFirstPageBra()
+        {
+            var pagedProducts = _homeService.GetBraProducts(1, _defaultPrdPageCount,
+                _imgService.AvailableImages()[0]);
+            pagedProducts.Items.ForEach(m => m.Image.Url = ConvertPath.Map(m.Image.Url));
+            return Json(pagedProducts, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetFirstPageBrief()
+        {
+            var pagedProducts = _homeService.GetBriefsProducts(1, _defaultPrdPageCount,
+                _imgService.AvailableImages()[0]);
+            pagedProducts.Items.ForEach(m => m.Image.Url = ConvertPath.Map(m.Image.Url));
+            return Json(pagedProducts, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult About()

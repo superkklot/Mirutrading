@@ -8,8 +8,8 @@
 }
 
 <ul class="nav nav-tabs">
-    <li role="presentation"><a href="#">文胸</a></li>
-    <li role="presentation"><a href="#">内裤</a></li>
+    <li role="presentation"><a href="javascript:void(0)" class="btnBra">文胸</a></li>
+    <li role="presentation"><a href="javascript:void(0)" class="btnBrief">内裤</a></li>
 </ul>
 
 <div class="content">
@@ -21,3 +21,15 @@
         </div>
     }
 </div>
+
+@section scripts{
+    <script src="~/Scripts/Home/underscore.js"></script>
+    <script src="~/Scripts/Home/home_index.js"></script>
+
+    <script type="text/template" id="bodyTemplate">
+        <div class="item">
+            <a href="<%=Product.LinkUrl%>" target="_blank"><img src="<%=Image.Url%>" /></a><br />
+            <a href="<%=Product.LinkUrl%>" target="_blank"><span><%=Product.Name%></span></a>
+        </div>
+    </script>
+}

@@ -22,7 +22,7 @@ namespace Mirutrading.Repository.Tests
 			repository.Add(prd);
 		}
 
-		[TestMethod]
+		//[TestMethod]
 		public void FindAllProducts()
 		{
 			ProductRepository repository = new ProductRepository();
