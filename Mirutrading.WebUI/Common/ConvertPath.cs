@@ -10,7 +10,7 @@ namespace Mirutrading.WebUI.Common
         public static string Map(string vpath)
         {
             var appPath = HttpContext.Current.Request.ApplicationPath;
-            return string.Format("{0}{1}", appPath, vpath.Substring(1));
+            return string.Format("{0}{1}", appPath.TrimEnd('/'), vpath.Substring(1));
         }
     }
 }
