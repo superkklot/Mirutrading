@@ -1,5 +1,5 @@
 ﻿$(function () {
-    var virtualDomain = "/Mirutrading";
+    //var virtualDomain = "/Mirutrading";
 
     $(".btnBrief").click(function () {
         $.ajax({

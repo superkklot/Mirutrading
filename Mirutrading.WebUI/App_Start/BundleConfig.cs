@@ -21,7 +21,8 @@ namespace Mirutrading.WebUI
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/respond.js",
+                      "~/Scripts/Share/VirtualPath.js"));
 
             bundles.Add(new StyleBundle("~/Content/admincss").Include(
                     "~/Content/bootstrap.css",

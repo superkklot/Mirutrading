@@ -1,6 +1,6 @@
 ﻿$(function () {
 	
-	var virtualDomain = "/Mirutrading";
+	//var virtualDomain = "/Mirutrading";
 
 	$(".go_image").click(function () {
 		var tr = event.target.parentNode.parentNode;

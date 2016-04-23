@@ -1,6 +1,6 @@
 ﻿$(function () {
 
-	var virtualDomain = "/Mirutrading";
+	//var virtualDomain = "/Mirutrading";
 
 	$(".add_image").click(function () {
 		$("#myModal").modal("show");
