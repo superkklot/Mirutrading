@@ -1,3 +1,2 @@
-﻿$(function () {
-    var virtualDomain = "/Mirutrading";
-})
+﻿var virtualDomain = "/Mirutrading";
+

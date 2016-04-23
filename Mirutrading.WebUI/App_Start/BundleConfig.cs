@@ -9,7 +9,8 @@ namespace Mirutrading.WebUI
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/Share/VirtualPath.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -21,8 +22,7 @@ namespace Mirutrading.WebUI
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js",
-                      "~/Scripts/Share/VirtualPath.js"));
+                      "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/admincss").Include(
                     "~/Content/bootstrap.css",
