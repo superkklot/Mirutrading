@@ -2,9 +2,9 @@
 	
 	//var virtualDomain = "/Mirutrading";
 
-	$(".go_image").click(function () {
-		var tr = event.target.parentNode.parentNode;
-		window.open(virtualDomain + "/Image/Index?productId=" + $(tr).attr("id"));
+	$(".go_image").click(function (event) {
+	    var tr = $(event.target).parent().parent();
+		window.open(virtualDomain + "/Image/Index?productId=" + tr.attr("id"));
 	})
 
 	// 添加产品
@@ -19,24 +19,25 @@
 	})
 
 	// 修改产品
-	$(".modify_product").click(function () {
+	$(".modify_product").click(function (event) {
 		$("#myModal").attr("purpose", "modify");
 		$("#myModalLabel").html("产品修改");
-		var tr = event.target.parentNode.parentNode;
-		$("#add_modify_id").val($(tr).attr("id"));
-		$("#add_modify_type").val($(tr).children(".item_type").html());
-		$("#add_modify_name").val($(tr).children(".item_name").html());
-		$("#add_modify_price").val($(tr).children(".item_price").html());
-		$("#add_modify_link").val($(tr).children(".item_link").html());
+		//var tr = event.target.parentNode.parentNode;
+		var tr = $(event.target).parent().parent();
+		$("#add_modify_id").val(tr.attr("id"));
+		$("#add_modify_type").val(tr.children(".item_type").html());
+		$("#add_modify_name").val(tr.children(".item_name").html());
+		$("#add_modify_price").val(tr.children(".item_price").html());
+		$("#add_modify_link").val(tr.children(".item_link").html());
 		$("#myModal").modal("show");
 	})
 
 	// 删除产品
-	$(".delete_product").click(function () {
+	$(".delete_product").click(function (event) {
 		if(confirm("确定要删除该产品？"))
 		{
-			var tr = event.target.parentNode.parentNode;
-			var id = $(tr).attr("id");
+		    var tr = $(event.target).parent().parent();
+			var id = tr.attr("id");
 			$.ajax({
 				url: virtualDomain + "/Admin/DeleteProduct",
 				type: "POST",
@@ -101,7 +102,7 @@
 	})
 
 	// 分页
-	$(".pageBtn").click(function () {
+	$(".pageBtn").click(function (event) {
 		var index = $(event.target).html();
 		window.location.href = virtualDomain + "/Admin/Index?index=" + index;
 	})
