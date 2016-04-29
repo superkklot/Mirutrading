@@ -8,7 +8,7 @@ namespace Mirutrading.Infrastructure.ExceptionHandling
 {
 	public class BusinessException : Exception
 	{
-		private int _errorCode;
+		protected int _errorCode;
 
 		public int ErrorCode { get { return _errorCode; } }
 
@@ -22,5 +22,27 @@ namespace Mirutrading.Infrastructure.ExceptionHandling
 		{
 			_errorCode = (int)errorCode;
 		}
+
+        public BusinessException(string msg) : base(msg)
+        {
+
+        }
 	}
+
+    public class BussinessException<T> : BusinessException
+        where T : struct
+    {
+        
+        public BussinessException(T errorCode)
+			: this(errorCode, errorCode.GetMessage())
+		{
+		}
+
+		public BussinessException(T errorCode, string msg)
+			: base(msg)
+		{
+            _errorCode = errorCode.ToInt();
+		}
+    }
+
 }

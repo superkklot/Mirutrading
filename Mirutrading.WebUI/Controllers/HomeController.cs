@@ -1,4 +1,5 @@
 ﻿using Mirutrading.Application.Interface;
+using Mirutrading.Infrastructure.ExceptionHandling;
 using Mirutrading.WebUI.Common;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace Mirutrading.WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        private const int _defaultPrdPageCount = 12;
+        private const int _defaultPrdPageCount = 5;
         private IHomeService _homeService;
         private IImageService _imgService;
         public HomeController(IHomeService homeService
@@ -29,17 +30,19 @@ namespace Mirutrading.WebUI.Controllers
             return View(pagedProducts);
         }
 
-        public ActionResult GetFirstPageBra()
+        public ActionResult GetPageBra(int? index)
         {
-            var pagedProducts = _homeService.GetBraProducts(1, _defaultPrdPageCount,
+            int idx = index.HasValue ? index.Value : 1;
+            var pagedProducts = _homeService.GetBraProducts(idx, _defaultPrdPageCount,
                 _imgService.AvailableImages()[0]);
             pagedProducts.Items.ForEach(m => m.Image.Url = ConvertPath.Map(m.Image.Url));
             return Json(pagedProducts, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetFirstPageBrief()
+        public ActionResult GetPageBrief(int? index)
         {
-            var pagedProducts = _homeService.GetBriefsProducts(1, _defaultPrdPageCount,
+            int idx = index.HasValue ? index.Value : 1;
+            var pagedProducts = _homeService.GetBriefsProducts(idx, _defaultPrdPageCount,
                 _imgService.AvailableImages()[0]);
             pagedProducts.Items.ForEach(m => m.Image.Url = ConvertPath.Map(m.Image.Url));
             return Json(pagedProducts, JsonRequestBehavior.AllowGet);
@@ -47,9 +50,21 @@ namespace Mirutrading.WebUI.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-			
-            return View();
+            try
+            {
+                
+
+                ViewBag.Message = "1";
+
+                if(ViewBag.Message="1")
+                    throw new BussinessException<OneErrorCode>(OneErrorCode.OneError);
+
+                return View();
+            }
+            catch (BusinessException be)
+            {
+                return View(be.Message);
+            }
         }
 
         public ActionResult Contact()
