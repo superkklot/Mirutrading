@@ -18,6 +18,7 @@ namespace Mirutrading.WebUI.Controllers
     {
 		private IAdminService _adminService;
 		private const string _index_url = "~/Admin/Index";
+        public const string _search_index_path = "~/IndexData";
 
 		public AdminController(IAdminService adminService)
 		{
@@ -95,6 +96,14 @@ namespace Mirutrading.WebUI.Controllers
 			_adminService.DeleteProduct(request);
 			return SuccessResult();
 		}
+
+        [MyAuthorize]
+        public ActionResult CreateIndex()
+        {
+            string path = Server.MapPath(_search_index_path);
+            _adminService.CreateIndex(path);
+            return SuccessResult();
+        }
 
 		private ActionResult SuccessResult()
 		{

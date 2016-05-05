@@ -13,6 +13,7 @@ namespace Mirutrading.WebUI.Controllers
     public class HomeController : Controller
     {
         private const int _defaultPrdPageCount = 5;
+        private const int _defaultSearchPageCount = 10;
         private IHomeService _homeService;
         private IImageService _imgService;
         public HomeController(IHomeService homeService
@@ -48,12 +49,22 @@ namespace Mirutrading.WebUI.Controllers
             return Json(pagedProducts, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult Search(string term, int? index)
+        {
+            var path = Server.MapPath(AdminController._search_index_path);
+            int idx = index.HasValue ? index.Value : 1;
+            var prds = _homeService.SearchProducts(idx, _defaultSearchPageCount, path, term);
+            if(prds.Items.HasValue())
+            {
+                prds.Items.ForEach(m => m.Image.Url = ConvertPath.Map(m.Image.Url));
+            }
+            return View(prds);
+        }
+
         public ActionResult About()
         {
             try
             {
-                
-
                 ViewBag.Message = "1";
 
                 if(ViewBag.Message="1")

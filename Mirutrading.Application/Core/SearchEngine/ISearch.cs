@@ -11,6 +11,6 @@ namespace Mirutrading.Application.Core.SearchEngine
     public interface ISearch
     {
         void CreateIndexForProducts(string path);
-        PagedCollection<IndexProduct> SearchProducts(string term);
+        IList<IndexProduct> SearchProducts(string path, string term);
     }
 }

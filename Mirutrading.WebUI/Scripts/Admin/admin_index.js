@@ -106,4 +106,19 @@
 		var index = $(event.target).html();
 		window.location.href = virtualDomain + "/Admin/Index?index=" + index;
 	})
+
+    // 创建搜索索引
+	$(".create_index").click(function () {
+	    $.ajax({
+	        url: virtualDomain + "/Admin/CreateIndex",
+	        type: "POST",
+	        data: "",
+	        success: function (data) {
+	            alert("创建成功");
+	        },
+	        error: function () {
+	            alert("创建失败");
+	        }
+	    });
+	})
 })
