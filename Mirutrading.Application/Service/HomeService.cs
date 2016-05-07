@@ -1,4 +1,5 @@
 ﻿using Mirutrading.Application.Core.Models.Images;
+using Mirutrading.Application.Core.SearchEngine;
 using Mirutrading.Application.Interface;
 using Mirutrading.Application.ViewModel.Admin;
 using Mirutrading.Application.ViewModel.Home;
@@ -49,6 +50,14 @@ namespace Mirutrading.Application.Service
         public PagedCollection<IndexProduct> GetBriefsProducts(int pageindex, int pagesize, ImageSize imgSize)
         {
             return GetProducts(pageindex, pagesize, imgSize, PrdType.Briefs);
+        }
+
+        public PagedCollection<IndexProduct> SearchProducts(int pageindex, int pagesize, string path, string term)
+        {
+            var search = SearchProvider.GetSearch();
+            var searchProducts = search.SearchProducts(path, term);
+            var pagedProducts = searchProducts.Skip((pageindex - 1) * pagesize).Take(pagesize).ToList();
+            return new PagedCollection<IndexProduct>(pagedProducts, pageindex, pagesize, searchProducts.Count);
         }
     }
 }

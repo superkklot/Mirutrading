@@ -14,5 +14,6 @@ namespace Mirutrading.Application.Interface
     {
         PagedCollection<IndexProduct> GetBraProducts(int pageindex, int pagesize, ImageSize imgSize);
         PagedCollection<IndexProduct> GetBriefsProducts(int pageindex, int pagesize, ImageSize imgSize);
+        PagedCollection<IndexProduct> SearchProducts(int pageindex, int pagesize, string path, string term);
     }
 }

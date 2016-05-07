@@ -23,5 +23,6 @@ namespace Mirutrading.Application.Interface
 
         PagedCollection<ProductRequest> GetProductsByType(int pageindex, int pagesize, PrdType prdType);
 
+        void CreateIndex(string path);
 	}
 }

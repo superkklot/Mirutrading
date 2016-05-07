@@ -1,5 +1,6 @@
 ﻿using EmitMapper;
 using Mirutrading.Application.Common;
+using Mirutrading.Application.Core.SearchEngine;
 using Mirutrading.Application.Interface;
 using Mirutrading.Application.ViewModel.Admin;
 using Mirutrading.Infrastructure;
@@ -80,5 +81,11 @@ namespace Mirutrading.Application.Service
 			Product prd = _productMapper_vtop.Map(request);
 			_productRepository.Delete(prd);
 		}
+
+        public void CreateIndex(string path)
+        {
+            ISearch search = SearchProvider.GetSearch();
+            search.CreateIndexForProducts(path);
+        }
 	}
 }

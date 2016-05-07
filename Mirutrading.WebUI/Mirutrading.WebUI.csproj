@@ -230,6 +230,7 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Image\Index.cshtml" />
     <Content Include="Views\Image\Upload.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

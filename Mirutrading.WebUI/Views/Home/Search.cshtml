@@ -1,0 +1,23 @@
+﻿@model Mirutrading.Infrastructure.PagedCollection<Mirutrading.Application.ViewModel.Home.IndexProduct>
+@{
+    ViewBag.Title = "马睿贸易搜索";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css{
+    <link href="~/Content/Home/Search.css" rel="stylesheet" />
+}
+
+<br />
+
+@if (Model != null && Model.Items != null && Model.Items.Count > 0)
+{
+    foreach (var item in Model.Items)
+    {
+        <div class="searchitem">
+            <a href="@item.Product.LinkUrl" target="_blank"><img src="@item.Image.Url" /></a>
+            <a href="@item.Product.LinkUrl" target="_blank">@Html.Raw(item.Product.Name)</a>
+        </div>
+        <hr />
+    }
+}
