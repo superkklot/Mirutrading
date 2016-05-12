@@ -13,15 +13,33 @@
     max-width:1200px;
 }
 
+.search{
+    margin-left: 20px
+}
+
+.navtop{
+    margin-left:20px;
+    color: #1bb7f2;
+}
+.navtop:hover,
+.navtop:focus{
+    text-decoration: none;
+}
+
 .title{
 	color:white;
 	font-size: 20px;
     line-height: 50px;
 }
+.title:hover,
+.title:focus{
+    text-decoration: none;
+}
 
 .right{
 	float:right;
     margin-top: 10px;
+    text-align:right;
 }
 
 .header{

@@ -63,24 +63,26 @@ namespace Mirutrading.WebUI.Controllers
 
         public ActionResult About()
         {
-            try
-            {
-                ViewBag.Message = "1";
+            //ViewBag.Message = @"";
+            return View();
+            //try
+            //{
+            //    ViewBag.Message = "1";
 
-                if(ViewBag.Message="1")
-                    throw new BussinessException<OneErrorCode>(OneErrorCode.OneError);
+            //    if(ViewBag.Message="1")
+            //        throw new BussinessException<OneErrorCode>(OneErrorCode.OneError);
 
-                return View();
-            }
-            catch (BusinessException be)
-            {
-                return View(be.Message);
-            }
+            //    return View();
+            //}
+            //catch (BusinessException be)
+            //{
+            //    return View(be.Message);
+            //}
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            //ViewBag.Message = "Your contact page.";
             
             return View();
         }
