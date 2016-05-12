@@ -12,7 +12,7 @@ namespace Mirutrading.WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        private const int _defaultPrdPageCount = 5;
+        private const int _defaultPrdPageCount = 12;
         private const int _defaultSearchPageCount = 10;
         private IHomeService _homeService;
         private IImageService _imgService;

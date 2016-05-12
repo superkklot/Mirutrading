@@ -1,2 +1,2 @@
-﻿var virtualDomain = "/Mirutrading";
+﻿var virtualDomain = "";
 
