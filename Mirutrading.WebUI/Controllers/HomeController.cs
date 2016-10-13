@@ -86,5 +86,15 @@ namespace Mirutrading.WebUI.Controllers
             
             return View();
         }
+
+        public ActionResult Pay()
+        {
+            return View();
+        }
+
+        public ActionResult GetPayInfo()
+        {
+
+        }
     }
 }

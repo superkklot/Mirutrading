@@ -1,5 +1,6 @@
 ﻿using Mirutrading.Application.Core.Models.Images;
 using Mirutrading.Application.Core.SearchEngine;
+using Mirutrading.Application.Core.Weixin;
 using Mirutrading.Application.Interface;
 using Mirutrading.Application.ViewModel.Admin;
 using Mirutrading.Application.ViewModel.Home;
@@ -58,6 +59,14 @@ namespace Mirutrading.Application.Service
             var searchProducts = search.SearchProducts(path, term);
             var pagedProducts = searchProducts.Skip((pageindex - 1) * pagesize).Take(pagesize).ToList();
             return new PagedCollection<IndexProduct>(pagedProducts, pageindex, pagesize, searchProducts.Count);
+        }
+
+        public WeixinPayInfo GetPayInfo()
+        {
+            WeixinPayInfo payInfo = new WeixinPayInfo();
+            payInfo.AppId = "xxx";
+            payInfo.NonceStr = WeixinPayUtil.getNoncestr();
+            payInfo.TimeStamp = WeixinPayUtil.getTimestamp();
         }
     }
 }
