@@ -67,6 +67,7 @@ namespace Mirutrading.Application.Service
             payInfo.AppId = "xxx";
             payInfo.NonceStr = WeixinPayUtil.getNoncestr();
             payInfo.TimeStamp = WeixinPayUtil.getTimestamp();
+
         }
     }
 }

@@ -76,6 +76,7 @@
     <Compile Include="Core\SearchEngine\ISearch.cs" />
     <Compile Include="Core\SearchEngine\SearchLucene.cs" />
     <Compile Include="Core\SearchEngine\SearchProvider.cs" />
+    <Compile Include="Core\Weixin\WeixinPayUtil.cs" />
     <Compile Include="Interface\IAdminService.cs" />
     <Compile Include="Interface\IHomeService.cs" />
     <Compile Include="Interface\IImageService.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="ViewModel\Admin\LoginRequest.cs" />
     <Compile Include="ViewModel\Admin\ProductRequest.cs" />
     <Compile Include="ViewModel\Home\IndexProduct.cs" />
+    <Compile Include="ViewModel\Home\WeixinPayInfo.cs" />
     <Compile Include="ViewModel\MessageBase.cs" />
   </ItemGroup>
   <ItemGroup>
