@@ -61,13 +61,45 @@ namespace Mirutrading.Application.Service
             return new PagedCollection<IndexProduct>(pagedProducts, pageindex, pagesize, searchProducts.Count);
         }
 
-        public WeixinPayInfo GetPayInfo()
+        public WeixinPayInfo GetPayInfo(string ip)
         {
             WeixinPayInfo payInfo = new WeixinPayInfo();
             payInfo.AppId = "xxx";
-            payInfo.NonceStr = WeixinPayUtil.getNoncestr();
-            payInfo.TimeStamp = WeixinPayUtil.getTimestamp();
+            payInfo.NonceStr = WeixinPayUtil.GetNoncestr();
+            payInfo.TimeStamp = WeixinPayUtil.GetTimestamp();
+            payInfo.Package = "prepay_id=" + GetPrePayId(ip);
+            payInfo.PaySign = GetPaySign(payInfo, "paySignKey");
+            return payInfo;
+        }
 
+        private string GetPaySign(WeixinPayInfo payInfo, string paySignKey)
+        {
+            SortedDictionary<string, string> sParams = new SortedDictionary<string, string>();
+            sParams.Add("appId", payInfo.AppId);
+            sParams.Add("timeStamp", payInfo.TimeStamp);
+            sParams.Add("nonceStr", payInfo.NonceStr);
+            sParams.Add("package", payInfo.Package);
+            sParams.Add("signType", "MD5");
+            return WeixinPayUtil.GetSign(sParams, paySignKey);
+        }
+
+        private string GetPrePayId(string ip)
+        {
+            UnifiedOrder order = new UnifiedOrder();
+            order.appid = "xxx";
+            order.attach = "version";
+            order.body = 10 + "人民币";
+            order.device_info = "";
+            order.mch_id = "mch_id";
+            order.nonce_str = WeixinPayUtil.GetNoncestr();
+            order.notify_url = "http://localhost/sample/a.aspx";
+            order.openid = "openid";
+            order.out_trade_no = "order_id";
+            order.trade_type = "JSAPI";
+            order.spbill_create_ip = ip;
+            order.total_fee = 10 * 100;
+
+            return WeixinPayUtil.GetPrepayId(order, "paySignKey");
         }
     }
 }
