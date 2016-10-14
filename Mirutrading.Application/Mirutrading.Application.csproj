@@ -76,6 +76,7 @@
     <Compile Include="Core\SearchEngine\ISearch.cs" />
     <Compile Include="Core\SearchEngine\SearchLucene.cs" />
     <Compile Include="Core\SearchEngine\SearchProvider.cs" />
+    <Compile Include="Core\Weixin\UnifiedOrder.cs" />
     <Compile Include="Core\Weixin\WeixinPayUtil.cs" />
     <Compile Include="Interface\IAdminService.cs" />
     <Compile Include="Interface\IHomeService.cs" />
